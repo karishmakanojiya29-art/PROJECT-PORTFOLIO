@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .game {
+            max-width: 400px;
+            margin: 20px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px #b8b8d0;
+        }
+
+        h1 {
+            color: #5145cd;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 25px auto;
+        }
+
+        .cell {
+            height: 95px;
+            font-size: 38px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            background: #e8e7ff;
+            color: #5145cd;
+            cursor: pointer;
+        }
+
+        .cell:hover {
+            background: #d5d2ff;
+        }
+
+        #status {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            min-height: 28px;
+        }
+
+        .reset {
+            padding: 12px 25px;
+            background: #5145cd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .reset:hover {
+            background: #3930a5;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="game">
+    <h1>⭕ Tic Tac Toe ❌</h1>
+
+    <p>Player X aur Player O ki baari-baari se chaal chalein.</p>
+
+    <h3 id="status">Player X ki baari</h3>
+
+    <div class="board">
+        <button class="cell" onclick="play(0)"></button>
+        <button class="cell" onclick="play(1)"></button>
+        <button class="cell" onclick="play(2)"></button>
+        <button class="cell" onclick="play(3)"></button>
+        <button class="cell" onclick="play(4)"></button>
+        <button class="cell" onclick="play(5)"></button>
+        <button class="cell" onclick="play(6)"></button>
+        <button class="cell" onclick="play(7)"></button>
+        <button class="cell" onclick="play(8)"></button>
+    </div>
+
+    <button class="reset" onclick="resetGame()">
+        Restart Game
+    </button>
+</div>
+
+<script>
+    let currentPlayer = "X";
+    let board = ["", "", "", "", "", "", "", "", ""];
+    let gameOver = false;
+
+    const cells = document.querySelectorAll(".cell");
+    const statusText = document.getElementById("status");
+
+    const winningPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    function play(index) {
+        if (board[index] !== "" || gameOver) {
+            return;
+        }
+
+        board[index] = currentPlayer;
+        cells[index].textContent = currentPlayer;
+
+        if (checkWinner()) {
+            statusText.textContent =
+                "🎉 Player " + currentPlayer + " Wins!";
+            gameOver = true;
+            return;
+        }
+
+        if (board.every(cell => cell !== "")) {
+            statusText.textContent = "🤝 Match Draw!";
+            gameOver = true;
+            return;
+        }
+
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+        statusText.textContent =
+            "Player " + currentPlayer + " ki baari";
+    }
+
+    function checkWinner() {
+        return winningPatterns.some(pattern => {
+            return pattern.every(index =>
+                board[index] === currentPlayer
+            );
+        });
+    }
+
+    function resetGame() {
+        board = ["", "", "", "", "", "", "", "", ""];
+        currentPlayer = "X";
+        gameOver = false;
+
+        cells.forEach(cell => {
+            cell.textContent = "";
+        });
+
+        statusText.textContent = "Player X ki baari";
+    }
+</script>
+
+</body>
+</html>

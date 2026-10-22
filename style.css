@@ -1,0 +1,193 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#090414;
+color:#fff;
+}
+
+header{
+position:fixed;
+width:100%;
+top:0;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+padding:20px 8%;
+z-index:1000;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+color:#6454d7;
+font-weight:bold;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:30px;
+}
+
+nav ul li a{
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+nav ul li a:hover{
+color:#bb86fc;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:140px 8%;
+min-height:100vh;
+}
+
+.left h1{
+font-size:30px;
+}
+
+.left h2{
+font-size:60px;
+color:#bb86fc;
+margin:10px 0;
+}
+
+.left h3{
+font-size:28px;
+margin-bottom:15px;
+}
+
+.left p{
+font-size:18px;
+margin-bottom:25px;
+}
+
+.btn{
+padding:12px 30px;
+background:#8a2be2;
+color:white;
+text-decoration:none;
+border-radius:30px;
+box-shadow:0 0 20px #8a2be2;
+transition:.3s;
+}
+
+.btn:hover{
+background:#bb86fc;
+box-shadow:0 0 30px #fc8686;
+}
+
+.right img{
+width:340px;
+height:340px;
+object-fit:cover;
+border-radius:50%;
+border:6px solid #bb86fc;
+box-shadow:0 0 40px #bb86fc;
+}
+
+section{
+padding:100px 8%;
+}
+
+section h2{
+text-align:center;
+font-size:40px;
+color:#bb86fc;
+margin-bottom:40px;
+}
+
+#about p{
+max-width:800px;
+margin:auto;
+text-align:center;
+line-height:2;
+font-size:18px;
+}
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
+}
+
+.skills div{
+background:#1b1235;
+padding:25px;
+text-align:center;
+border-radius:12px;
+font-size:20px;
+transition:.3s;
+box-shadow:0 0 15px #d1ecba;
+}
+
+.skills div:hover{
+transform:translateY(-10px);
+background:#bfefae;
+}
+
+.project{
+background:#1b1235;
+padding:25px;
+margin-bottom:20px;
+border-radius:15px;
+box-shadow:0 0 15px #6a0dad;
+}
+
+.project h3{
+color:#bb86fc;
+margin-bottom:10px;
+}
+
+#contact{
+text-align:center;
+}
+
+footer{
+background:#05020d;
+padding:20px;
+text-align:center;
+margin-top:30px;
+}
+
+@media(max-width:768px){
+
+.hero{
+flex-direction:column-reverse;
+text-align:center;
+}
+.resume-btn{
+    display:inline-block;
+    margin-top:15px;
+}
+
+.left h2{
+font-size:40px;
+}
+
+.right img{
+width:250px;
+height:250px;
+margin-bottom:30px;
+}
+
+nav ul{
+display:none;
+}
+
+}

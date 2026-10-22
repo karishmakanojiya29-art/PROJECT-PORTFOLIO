@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef6ff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #ccc;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #087f8c;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 12px;
+            background: #087f8c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .patient {
+            background: #f0fafa;
+            border: 1px solid #c5e6e6;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+        }
+
+        .delete-btn {
+            background: #d93636;
+            margin-top: 8px;
+        }
+
+        a {
+            color: #087f8c;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Hospital Management System</h1>
+    <p style="text-align:center;">
+        Patient Registration & Appointment Details
+    </p>
+
+    <h2>Register Patient</h2>
+
+    <form id="patientForm">
+        <input type="text" id="name"
+               placeholder="Patient Name" required>
+
+        <input type="number" id="age"
+               placeholder="Patient Age"
+               min="1" max="120" required>
+
+        <input type="text" id="problem"
+               placeholder="Patient Problem" required>
+
+        <select id="doctor" required>
+            <option value="">Select Doctor</option>
+            <option>General Physician</option>
+            <option>Cardiologist</option>
+            <option>Dermatologist</option>
+            <option>Pediatrician</option>
+        </select>
+
+        <label for="date">Appointment Date</label>
+        <input type="date" id="date" required>
+
+        <button type="submit" class="add-btn">
+            Add Patient
+        </button>
+    </form>
+
+    <h2>Patient List</h2>
+    <div id="patientList"></div>
+
+    <p>
+        <a href="index.html">Back to Portfolio</a>
+    </p>
+
+</div>
+
+<script>
+    const form = document.getElementById("patientForm");
+    const patientList = document.getElementById("patientList");
+
+    let patients = [];
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const patient = {
+            id: Date.now(),
+            name: document.getElementById("name").value.trim(),
+            age: document.getElementById("age").value,
+            problem: document.getElementById("problem").value.trim(),
+            doctor: document.getElementById("doctor").value,
+            date: document.getElementById("date").value
+        };
+
+        patients.push(patient);
+        showPatients();
+        form.reset();
+    });
+
+    function showPatients() {
+        patientList.innerHTML = "";
+
+        patients.forEach(function(patient) {
+            const card = document.createElement("div");
+            card.className = "patient";
+
+            const details = document.createElement("p");
+            details.textContent =
+                "Name: " + patient.name +
+                " | Age: " + patient.age +
+                " | Problem: " + patient.problem +
+                " | Doctor: " + patient.doctor +
+                " | Date: " + patient.date;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            deleteButton.textContent = "Delete Patient";
+
+            deleteButton.addEventListener("click", function() {
+                patients = patients.filter(function(item) {
+                    return item.id !== patient.id;
+                });
+                showPatients();
+            });
+
+            card.appendChild(details);
+            card.appendChild(deleteButton);
+            patientList.appendChild(card);
+        });
+    }
+</script>
+
+</body>
+</html>

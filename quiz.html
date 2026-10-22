@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2ff;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .quiz {
+            background: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px #ccc;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            background: #6558e8;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4435c7;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz">
+        <h1>Quiz Application</h1>
+        <h3 id="question"></h3>
+
+        <div id="options"></div>
+
+        <p id="result"></p>
+        <button id="next" onclick="nextQuestion()">
+            Next Question
+        </button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "1. HTML ka full form kya hai?",
+                options: [
+                    "Hyper Text Markup Language",
+                    "High Text Machine Language",
+                    "Hyper Tool Multi Language",
+                    "Home Text Markup Language"
+                ],
+                answer: 0
+            },
+            {
+                question: "2. CSS ka use kisliye hota hai?",
+                options: [
+                    "Database",
+                    "Website styling",
+                    "File storage",
+                    "Operating system"
+                ],
+                answer: 1
+            },
+            {
+                question: "3. JavaScript ka use kya hai?",
+                options: [
+                    "Website interactive banana",
+                    "Computer repair",
+                    "Typing only",
+                    "Image printing"
+                ],
+                answer: 0
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+        let answered = false;
+
+        function showQuestion() {
+            answered = false;
+
+            document.getElementById("question").textContent =
+                questions[current].question;
+
+            document.getElementById("result").textContent = "";
+            document.getElementById("options").innerHTML = "";
+
+            questions[current].options.forEach((option, index) => {
+                const btn = document.createElement("button");
+                btn.textContent = option;
+
+                btn.onclick = () => {
+                    if (answered) return;
+
+                    answered = true;
+
+                    if (index === questions[current].answer) {
+                        score++;
+                        document.getElementById("result").textContent =
+                            "Correct Answer!";
+                    } else {
+                        document.getElementById("result").textContent =
+                            "Wrong Answer!";
+                    }
+                };
+
+                document.getElementById("options").appendChild(btn);
+            });
+
+            document.getElementById("next").textContent =
+                current === questions.length - 1
+                ? "Show Score"
+                : "Next Question";
+        }
+
+        function nextQuestion() {
+            if (!answered) {
+                document.getElementById("result").textContent =
+                    "Please select an answer first!";
+                return;
+            }
+
+            current++;
+
+            if (current < questions.length) {
+                showQuestion();
+            } else {
+                document.querySelector(".quiz").innerHTML =
+                    "<h1>Quiz Completed!</h1>" +
+                    "<h2>Your Score: " + score + " / " +
+                    questions.length + "</h2>" +
+                    '<button onclick="location.reload()">Restart Quiz</button>' +
+                    '<p><a href="index.html">Back to Portfolio</a></p>';
+            }
+        }
+
+        showQuestion();
+    </script>
+</body>
+</html>
