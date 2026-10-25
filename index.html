@@ -1,14 +1,209 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <meta http-equiv="refresh" content="0;
-    url=ground%20teck.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow | Student Study Planner</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <p>Opening My Portfolio...</p>
-  <a href="ground%20teck.html">Open Portfolio</a>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">S</div>
+                <span>StudyFlow</span>
+            </div>
+
+            <p class="nav-heading">WORKSPACE</p>
+
+            <nav class="navigation">
+                <a href="#dashboard" class="nav-link active">
+                    <span>▦</span> Dashboard
+                </a>
+                <a href="#planner" class="nav-link">
+                    <span>▤</span> My Study Plan
+                </a>
+            </nav>
+
+            <div class="sidebar-note">
+                <div class="note-icon">✦</div>
+                <h3>Keep going!</h3>
+                <p>Small steps every day lead to big results.</p>
+            </div>
+
+            <p class="sidebar-footer">YOUR PERSONAL STUDY SPACE</p>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="dashboard">
+
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">YOUR LEARNING SPACE</p>
+                    <h1>Study Dashboard</h1>
+                    <p class="subtitle" id="today-date"></p>
+                </div>
+                <div class="avatar">S</div>
+            </header>
+
+            <section class="welcome-card">
+                <div>
+                    <p class="welcome-label">YOUR DAILY GOALS</p>
+                    <h2>Learn something new today.</h2>
+                    <p>Plan your study sessions and make every hour count.</p>
+                    <a href="#planner" class="primary-link">Plan your study ↗</a>
+                </div>
+                <div class="welcome-art" aria-hidden="true">📚</div>
+            </section>
+
+            <!-- Statistics -->
+            <section class="stats-grid" aria-label="Study statistics">
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Tasks</span>
+                        <span class="stat-icon purple">▤</span>
+                    </div>
+                    <h2 id="total-tasks">0</h2>
+                    <p>Tasks in your planner</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Completed</span>
+                        <span class="stat-icon green">✓</span>
+                    </div>
+                    <h2 id="completed-tasks">0</h2>
+                    <p>Tasks finished</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Pending</span>
+                        <span class="stat-icon orange">◷</span>
+                    </div>
+                    <h2 id="pending-tasks">0</h2>
+                    <p>Tasks to work on</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Study Progress</span>
+                        <span class="stat-icon blue">↗</span>
+                    </div>
+                    <h2 id="progress-number">0%</h2>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Planner -->
+            <section class="planner-section" id="planner">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">STAY ORGANIZED</p>
+                        <h2>My Study Plan</h2>
+                    </div>
+                    <span class="task-count" id="visible-count">0 tasks</span>
+                </div>
+
+                <!-- Add Task Form -->
+                <form id="task-form" class="task-form">
+                    <div class="form-heading">
+                        <h3>＋ Add a Study Task</h3>
+                        <p>Set your next learning goal.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field full-width">
+                            <label for="task-title">Task / Topic</label>
+                            <input
+                                type="text"
+                                id="task-title"
+                                placeholder="e.g. Learn JavaScript Arrays"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="subject">Subject</label>
+                            <select id="subject" required>
+                                <option value="">Select subject</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JavaScript</option>
+                                <option>React JS</option>
+                                <option>C++</option>
+                                <option>Mathematics</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="task-date">Study Date</label>
+                            <input type="date" id="task-date" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="duration">Study Duration</label>
+                            <select id="duration" required>
+                                <option value="15">15 minutes</option>
+                                <option value="30" selected>30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60">1 hour</option>
+                                <option value="90">1.5 hours</option>
+                                <option value="120">2 hours</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="priority">Priority</label>
+                            <select id="priority" required>
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="add-button">
+                        + Add Task
+                    </button>
+                </form>
+
+                <!-- Filters -->
+                <div class="task-toolbar">
+                    <div>
+                        <h3>Your Tasks</h3>
+                        <p>Manage your learning goals.</p>
+                    </div>
+
+                    <select id="task-filter" aria-label="Filter tasks">
+                        <option value="all">All Tasks</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div id="task-list" class="task-list"></div>
+
+            </section>
+
+            <footer class="footer">
+                Made for your learning journey <span>♥</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
+
